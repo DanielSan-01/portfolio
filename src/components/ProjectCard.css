@@ -1,0 +1,99 @@
+.project-card {
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  /* Removed transform from CSS to avoid conflict with GSAP */
+  box-shadow: 0 10px 25px var(--shadow-lg);
+  /* Initial state for GSAP animation - will be animated to visible */
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 6px var(--shadow-md);
+}
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  transform: scale(1.1);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1);
+}
+
+.project-content {
+  padding: 1rem;
+}
+
+.project-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-title {
+  color: var(--text-primary);
+}
+
+.project-description {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tech-more {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.125rem 0.5rem;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .project-image img {
+    height: 224px;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+  }
+  
+  .project-title {
+    font-size: 1.25rem;
+  }
+  
+  .project-description {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-image img {
+    height: 256px;
+  }
+  
+  .project-title {
+    font-size: 1.5rem;
+  }
+} 

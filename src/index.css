@@ -1,0 +1,310 @@
+/* CSS Custom Properties - Terminal Theme */
+:root {
+  /* Terminal Color Palette */
+  --terminal-bg: #000000;
+  --terminal-text: #00ff00;
+  --terminal-text-dim: #00cc00;
+  --terminal-text-bright: #00ff88;
+  --terminal-prompt: #00ff00;
+  --terminal-cursor: #00ff00;
+  --terminal-border: #00ff00;
+  --terminal-link: #00ff88;
+  --terminal-link-hover: #00ff00;
+  --terminal-accent: #00cc00;
+  
+  /* Emerald Green Color Palette (kept for compatibility) */
+  --emerald-50: #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-200: #a7f3d0;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  
+  /* Blue Color Palette for Accents */
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  
+  /* Primary Brand Colors */
+  --primary: var(--emerald-500);
+  --primary-dark: var(--emerald-600);
+  --primary-darker: var(--emerald-700);
+  --primary-light: var(--emerald-400);
+  --primary-lighter: var(--emerald-300);
+  
+  /* Blue Accent Colors */
+  --accent-blue: var(--blue-600);
+  --accent-blue-hover: var(--blue-700);
+  --accent-blue-light: var(--blue-500);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--emerald-500) 0%, var(--emerald-600) 100%);
+  --gradient-primary-light: linear-gradient(135deg, var(--emerald-400) 0%, var(--emerald-500) 100%);
+  --gradient-blue: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+  --gradient-hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(5, 150, 105, 0.5) 100%);
+  --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.2) 100%);
+  --gradient-projects-hero: linear-gradient(135deg, var(--emerald-500) 0%, var(--emerald-600) 100%);
+  --gradient-tech-badge: linear-gradient(135deg, #667eea, #764ba2);
+  
+  /* Light Mode Colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b7280;
+  --text-tertiary: #4b5563;
+  --text-white: #ffffff;
+  --text-muted: #9ca3af;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-white: #ffffff;
+  --bg-gray-50: #f9fafb;
+  --bg-gray-100: #f3f4f6;
+  --bg-gray-200: #e5e7eb;
+  
+  /* Card & Surface Colors */
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-elevated: #ffffff;
+  
+  /* Border & Divider Colors */
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --border-light: #f3f4f6;
+  
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+  --shadow-xl: rgba(0, 0, 0, 0.2);
+  
+  /* Interactive States */
+  --hover-overlay: rgba(0, 0, 0, 0.05);
+  --active-overlay: rgba(0, 0, 0, 0.1);
+  
+  /* Button Variants */
+  --btn-primary-bg: var(--gradient-primary);
+  --btn-primary-hover: linear-gradient(to right, var(--primary-dark), var(--primary-darker));
+  --btn-secondary-bg: var(--surface-primary);
+  --btn-secondary-border: var(--primary);
+  --btn-secondary-text: var(--primary);
+  --btn-secondary-hover-bg: var(--primary);
+  --btn-secondary-hover-text: var(--text-white);
+}
+
+/* Dark Mode Colors - System Preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Text Colors */
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+    --text-white: #ffffff;
+    --text-muted: #6b7280;
+    
+    /* Background Colors */
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --bg-white: #1f2937;
+    --bg-gray-50: #111827;
+    --bg-gray-100: #374151;
+    --bg-gray-200: #4b5563;
+    
+    /* Card & Surface Colors */
+    --surface-primary: #1f2937;
+    --surface-secondary: #111827;
+    --surface-elevated: #374151;
+    
+    /* Border & Divider Colors */
+    --border-primary: #374151;
+    --border-secondary: #4b5563;
+    --border-light: #374151;
+    
+    /* Shadow Colors */
+    --shadow-sm: rgba(0, 0, 0, 0.2);
+    --shadow-md: rgba(0, 0, 0, 0.3);
+    --shadow-lg: rgba(0, 0, 0, 0.4);
+    --shadow-xl: rgba(0, 0, 0, 0.5);
+    
+    /* Interactive States */
+    --hover-overlay: rgba(255, 255, 255, 0.05);
+    --active-overlay: rgba(255, 255, 255, 0.1);
+    
+    /* Button Variants */
+    --btn-secondary-bg: var(--surface-elevated);
+    --btn-secondary-border: var(--primary);
+    --btn-secondary-text: var(--primary-light);
+    --btn-secondary-hover-bg: var(--primary);
+    --btn-secondary-hover-text: var(--text-white);
+    
+    /* Enhanced gradients for dark mode */
+    --gradient-hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.6) 0%, rgba(5, 150, 105, 0.7) 100%);
+    --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%);
+  }
+}
+
+/* Manual Light Mode Toggle */
+[data-theme="light"] {
+  /* Text Colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b7280;
+  --text-tertiary: #4b5563;
+  --text-white: #ffffff;
+  --text-muted: #9ca3af;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-white: #ffffff;
+  --bg-gray-50: #f9fafb;
+  --bg-gray-100: #f3f4f6;
+  --bg-gray-200: #e5e7eb;
+  
+  /* Card & Surface Colors */
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-elevated: #ffffff;
+  
+  /* Border & Divider Colors */
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --border-light: #f3f4f6;
+  
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+  --shadow-xl: rgba(0, 0, 0, 0.2);
+  
+  /* Interactive States */
+  --hover-overlay: rgba(0, 0, 0, 0.05);
+  --active-overlay: rgba(0, 0, 0, 0.1);
+  
+  /* Button Variants */
+  --btn-secondary-bg: var(--surface-primary);
+  --btn-secondary-border: var(--primary);
+  --btn-secondary-text: var(--primary);
+  --btn-secondary-hover-bg: var(--primary);
+  --btn-secondary-hover-text: var(--text-white);
+  
+  /* Light mode gradients */
+  --gradient-hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(5, 150, 105, 0.5) 100%);
+  --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.2) 100%);
+}
+
+/* Manual Dark Mode Toggle */
+[data-theme="dark"] {
+  /* Text Colors */
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --text-white: #ffffff;
+  --text-muted: #6b7280;
+  
+  /* Background Colors */
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --bg-white: #1f2937;
+  --bg-gray-50: #111827;
+  --bg-gray-100: #374151;
+  --bg-gray-200: #4b5563;
+  
+  /* Card & Surface Colors */
+  --surface-primary: #1f2937;
+  --surface-secondary: #111827;
+  --surface-elevated: #374151;
+  
+  /* Border & Divider Colors */
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  --border-light: #374151;
+  
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  --shadow-md: rgba(0, 0, 0, 0.3);
+  --shadow-lg: rgba(0, 0, 0, 0.4);
+  --shadow-xl: rgba(0, 0, 0, 0.5);
+  
+  /* Interactive States */
+  --hover-overlay: rgba(255, 255, 255, 0.05);
+  --active-overlay: rgba(255, 255, 255, 0.1);
+  
+  /* Button Variants */
+  --btn-secondary-bg: var(--surface-elevated);
+  --btn-secondary-border: var(--primary);
+  --btn-secondary-text: var(--primary-light);
+  --btn-secondary-hover-bg: var(--primary);
+  --btn-secondary-hover-text: var(--text-white);
+  
+  /* Enhanced gradients for dark mode */
+  --gradient-hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.6) 0%, rgba(5, 150, 105, 0.7) 100%);
+  --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}

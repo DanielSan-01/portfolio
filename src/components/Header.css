@@ -1,0 +1,108 @@
+.header {
+  /* Aurora-inspired gradient matching the hero section - much more opaque and solid */
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05)),
+    linear-gradient(135deg, 
+      rgba(16, 185, 129, 0.98) 0%, 
+      rgba(5, 150, 105, 0.98) 50%,
+      rgba(14, 165, 233, 0.98) 100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px) saturate(180%);
+  will-change: transform; /* Optimize for GSAP animations */
+  transform: translateY(0); /* Initial state for GSAP */
+  /* Ensure header is visible by default */
+  opacity: 1;
+  /* Subtle border to match aurora glow */
+  border-bottom: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem; /* Add horizontal padding so logo and nav aren't flush with edges */
+}
+
+.logo {
+  color: var(--text-white);
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  /* Add text shadow for better readability */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  /* Bright white to match hero text */
+  background: linear-gradient(45deg, #ffffff, #f0f9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-white);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  /* Add text shadow for better readability */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  /* Subtle glow effect on hover */
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.nav-text {
+  display: none;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .nav {
+    gap: 2rem;
+  }
+  
+  .nav-text {
+    display: inline;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .nav-link {
+    padding: 0.75rem 1rem;
+  }
+} 
