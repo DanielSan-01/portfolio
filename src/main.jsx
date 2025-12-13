@@ -4,10 +4,11 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
-// Register service worker for caching
-if ('serviceWorker' in navigator) {
+// Register service worker for caching (only in production and with correct base path)
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/portofolio-website/sw.js')
+    navigator.serviceWorker
+      .register('/portfolio/sw.js')
       .then((registration) => {
         console.log('SW registered: ', registration)
       })
@@ -19,7 +20,7 @@ if ('serviceWorker' in navigator) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/portofolio-website">
+    <BrowserRouter basename="/portfolio">
       <App />
     </BrowserRouter>
   </StrictMode>,
