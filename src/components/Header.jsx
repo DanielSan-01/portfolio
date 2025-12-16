@@ -95,12 +95,12 @@ const Header = () => {
     <header ref={headerRef} className="header">
       <div className="container-custom">
         <div className="header-content">
-          <Link to="/" className="logo">
+          <Link to="/classic" className="logo">
             <span className="logo-text">DanielSan</span>
           </Link>
           
           <nav className="nav">
-            <Link to="/projects" className="nav-link">
+            <Link to="/classic/projects" className="nav-link">
               <FolderOpen size={20} />
               <span className="nav-text">Projects</span>
             </Link>

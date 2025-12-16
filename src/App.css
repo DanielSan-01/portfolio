@@ -5,10 +5,3 @@
   margin: 0;
   padding: 0;
 }
-
-/* Classic layout can grow and scroll normally */
-.App.classic-layout {
-  min-height: 100vh;
-  height: auto;
-  overflow: visible;
-}

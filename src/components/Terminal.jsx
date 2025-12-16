@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { projects } from '../data/projects'
 import './Terminal.css'
 
@@ -21,7 +22,8 @@ const ASCII_BANNER = `__╱╲╲╲╲╲╲╲╲╲╲╲╲_________________
         ___________╲╱╲╲╲______________╲╱╱╱╲╲╲╲╲╱___╲╱╲╲╲____________╲╱╱╲╲╲╲╲______╲╱╲╲╲_______╲╱╱╱╲╲╲╲╲╱____╱╲╲╲╲╲╲╲╲╲_╲╱╲╲╲__╲╱╱╱╲╲╲╲╲╱___                             
          ___________╲╱╱╱_________________╲╱╱╱╱╱_____╲╱╱╱______________╲╱╱╱╱╱_______╲╱╱╱__________╲╱╱╱╱╱_____╲╱╱╱╱╱╱╱╱╱__╲╱╱╱_____╲╱╱╱╱╱_____                            `
 
-const Terminal = ({ onSwitchLayout }) => {
+const Terminal = () => {
+  const navigate = useNavigate()
   // Welcome message
   const welcomeMessage = {
     type: 'output',
@@ -208,35 +210,30 @@ const Terminal = ({ onSwitchLayout }) => {
         return
 
       case 'classic':
-        if (typeof onSwitchLayout === 'function') {
-          output = [
-            'Switching to classic layout...',
-            ''
-          ]
-          // Add command and output to history before switching layout
-          setCommandHistory(prev => [
-            ...prev,
-            { type: 'command', content: cmd },
-            { type: 'output', content: output }
-          ])
+        output = [
+          'Switching to classic layout...',
+          ''
+        ]
+        // Add command and output to history before navigating
+        setCommandHistory(prev => [
+          ...prev,
+          { type: 'command', content: cmd },
+          { type: 'output', content: output }
+        ])
 
-          if (cmd.trim()) {
-            setExecutedCommands(prev => {
-              const newHistory = [...prev, cmd]
-              return newHistory.slice(-50)
-            })
-          }
-
-          setHistoryIndex(-1)
-          onSwitchLayout()
-          return
-        } else {
-          output = [
-            'Classic layout is not available in this build.',
-            ''
-          ]
+        if (cmd.trim()) {
+          setExecutedCommands(prev => {
+            const newHistory = [...prev, cmd]
+            return newHistory.slice(-50)
+          })
         }
-        break
+
+        setHistoryIndex(-1)
+        // Navigate to classic route after a short delay to show the message
+        setTimeout(() => {
+          navigate('/classic')
+        }, 500)
+        return
 
       case '':
         // Empty command, just show prompt

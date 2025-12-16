@@ -61,7 +61,7 @@ const ProjectCard = ({ project }) => {
 
   return (
     <Link 
-      to={`/project/${project.id}`} 
+      to={`/classic/project/${project.id}`} 
       className="card project-card"
       ref={cardRef}
       onMouseEnter={handleMouseEnter}

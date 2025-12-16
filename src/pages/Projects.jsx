@@ -178,7 +178,7 @@ const Projects = () => {
                 <Github size={20} />
                 Follow on GitHub
               </a>
-              <Link to="/" className="btn-secondary">
+              <Link to="/classic" className="btn-secondary">
                 Back to Home
               </Link>
             </div>

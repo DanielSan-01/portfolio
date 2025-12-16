@@ -164,7 +164,7 @@ const ProjectArticle = () => {
         <div className="container-custom">
           <h1>Project Not Found</h1>
           <p>The project you're looking for doesn't exist.</p>
-          <Link to="/" className="btn-primary">
+          <Link to="/classic" className="btn-primary">
             <ArrowLeft size={20} />
             Back to Home
           </Link>
@@ -182,7 +182,7 @@ const ProjectArticle = () => {
       />
       <div className="container-custom">
         {/* Back Navigation */}
-        <Link ref={backLinkRef} to="/" className="back-link">
+        <Link ref={backLinkRef} to="/classic" className="back-link">
           <ArrowLeft size={20} />
           Back to Portfolio
         </Link>

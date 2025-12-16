@@ -27,11 +27,11 @@ const NotFound = () => {
           </div>
           
           <div className="not-found-actions">
-            <Link to="/" className="btn-primary">
+            <Link to="/classic" className="btn-primary">
               <Home size={20} />
               Go Home
             </Link>
-            <Link to="/projects" className="btn-secondary">
+            <Link to="/classic/projects" className="btn-secondary">
               <FolderOpen size={20} />
               View Projects
             </Link>
@@ -47,11 +47,11 @@ const NotFound = () => {
           <div className="not-found-suggestions">
             <h3>Popular Pages</h3>
             <ul>
-              <li><Link to="/">Portfolio Home</Link></li>
-              <li><Link to="/projects">All Projects</Link></li>
-              <li><Link to="/project/holidaze">Holidaze Project</Link></li>
-              <li><Link to="/project/agency2-fork">The Spot Project</Link></li>
-              <li><Link to="/project/community-science-museum">Science Museum Project</Link></li>
+              <li><Link to="/classic">Portfolio Home</Link></li>
+              <li><Link to="/classic/projects">All Projects</Link></li>
+              <li><Link to="/classic/project/holidaze">Holidaze Project</Link></li>
+              <li><Link to="/classic/project/agency2-fork">The Spot Project</Link></li>
+              <li><Link to="/classic/project/community-science-museum">Science Museum Project</Link></li>
             </ul>
           </div>
         </div>
