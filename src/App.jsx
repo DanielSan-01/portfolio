@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Terminal from './components/Terminal'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -14,6 +14,16 @@ import './App.css'
 
 function App() {
   const [layoutMode, setLayoutMode] = useState('terminal') // 'terminal' | 'classic'
+
+  // Ensure body can scroll when switching to classic layout
+  useEffect(() => {
+    if (layoutMode === 'classic') {
+      document.body.style.overflow = 'auto'
+      document.body.style.height = 'auto'
+      document.documentElement.style.overflow = 'auto'
+      document.documentElement.style.height = 'auto'
+    }
+  }, [layoutMode])
 
   return (
     <ErrorBoundary>
