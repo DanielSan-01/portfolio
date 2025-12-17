@@ -272,6 +272,11 @@ html, body {
   overflow-y: auto;
 }
 
+/* Only apply terminal-specific constraints when terminal is active */
+.App:not(:has(.classic-layout)) {
+  /* Terminal mode - can have height constraints */
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -279,6 +284,8 @@ html {
 #root {
   width: 100%;
   min-height: 100vh;
+  height: auto;
+  overflow: visible;
 }
 
 body {

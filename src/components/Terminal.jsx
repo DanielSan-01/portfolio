@@ -232,6 +232,12 @@ const Terminal = () => {
         // Navigate to classic route after a short delay to show the message
         setTimeout(() => {
           navigate('/classic')
+          // Fallback: if navigate doesn't work, use window.location
+          setTimeout(() => {
+            if (window.location.pathname !== '/portfolio/classic' && window.location.pathname !== '/classic') {
+              window.location.href = '/portfolio/classic'
+            }
+          }, 100)
         }, 500)
         return
 

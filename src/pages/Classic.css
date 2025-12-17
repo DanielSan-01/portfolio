@@ -1,4 +1,173 @@
-/* Classic Layout Styles */
+/* Classic Layout - Completely Self-Contained CSS */
+
+/* CSS Custom Properties for Classic Layout */
+.classic-layout {
+  /* Emerald Green Color Palette */
+  --emerald-50: #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-200: #a7f3d0;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  
+  /* Blue Color Palette for Accents */
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  
+  /* Primary Brand Colors */
+  --primary: var(--emerald-500);
+  --primary-dark: var(--emerald-600);
+  --primary-darker: var(--emerald-700);
+  --primary-light: var(--emerald-400);
+  --primary-lighter: var(--emerald-300);
+  
+  /* Blue Accent Colors */
+  --accent-blue: var(--blue-600);
+  --accent-blue-hover: var(--blue-700);
+  --accent-blue-light: var(--blue-500);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--emerald-500) 0%, var(--emerald-600) 100%);
+  --gradient-primary-light: linear-gradient(135deg, var(--emerald-400) 0%, var(--emerald-500) 100%);
+  --gradient-blue: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+  --gradient-hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(5, 150, 105, 0.5) 100%);
+  --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.2) 100%);
+  --gradient-projects-hero: linear-gradient(135deg, var(--emerald-500) 0%, var(--emerald-600) 100%);
+  
+  /* Light Mode Colors (default) */
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b7280;
+  --text-tertiary: #4b5563;
+  --text-white: #ffffff;
+  --text-muted: #9ca3af;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-white: #ffffff;
+  --bg-gray-50: #f9fafb;
+  --bg-gray-100: #f3f4f6;
+  --bg-gray-200: #e5e7eb;
+  
+  /* Card & Surface Colors */
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-elevated: #ffffff;
+  
+  /* Border & Divider Colors */
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --border-light: #f3f4f6;
+  
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+  --shadow-xl: rgba(0, 0, 0, 0.2);
+  
+  /* Interactive States */
+  --hover-overlay: rgba(0, 0, 0, 0.05);
+  --active-overlay: rgba(0, 0, 0, 0.1);
+  
+  /* Button Variants */
+  --btn-primary-bg: var(--gradient-primary);
+  --btn-primary-hover: linear-gradient(to right, var(--primary-dark), var(--primary-darker));
+  --btn-secondary-bg: var(--surface-primary);
+  --btn-secondary-border: var(--primary);
+  --btn-secondary-text: var(--primary);
+  --btn-secondary-hover-bg: var(--primary);
+  --btn-secondary-hover-text: var(--text-white);
+}
+
+/* Dark Mode Support */
+.classic-layout[data-theme="dark"],
+.classic-layout :global([data-theme="dark"]) {
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --text-white: #ffffff;
+  --text-muted: #6b7280;
+  
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --bg-white: #1f2937;
+  --bg-gray-50: #111827;
+  --bg-gray-100: #374151;
+  --bg-gray-200: #4b5563;
+  
+  --surface-primary: #1f2937;
+  --surface-secondary: #111827;
+  --surface-elevated: #374151;
+  
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  --border-light: #374151;
+  
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  --shadow-md: rgba(0, 0, 0, 0.3);
+  --shadow-lg: rgba(0, 0, 0, 0.4);
+  --shadow-xl: rgba(0, 0, 0, 0.5);
+  
+  --hover-overlay: rgba(255, 255, 255, 0.05);
+  --active-overlay: rgba(255, 255, 255, 0.1);
+  
+  --btn-secondary-bg: var(--surface-elevated);
+  --btn-secondary-border: var(--primary);
+  --btn-secondary-text: var(--primary-light);
+  --btn-secondary-hover-bg: var(--primary);
+  --btn-secondary-hover-text: var(--text-white);
+  
+  --gradient-hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.6) 0%, rgba(5, 150, 105, 0.7) 100%);
+  --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%);
+}
+
+/* Force scrolling to work - override any global styles */
+/* Use class-based selectors for better browser support */
+html.classic-active,
+body.classic-active {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  position: relative !important;
+}
+
+#root.classic-active {
+  height: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Also target when classic-layout is present (for browsers that support :has) */
+html:has(.classic-layout),
+body:has(.classic-layout) {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+#root:has(.classic-layout) {
+  height: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Classic Layout Container */
 .classic-layout {
   width: 100%;
   min-height: 100vh;
@@ -8,13 +177,32 @@
   padding: 0;
   height: auto;
   overflow: visible;
+  position: relative;
+  
+  /* Font family */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure body and html can scroll when classic layout is active */
+.classic-layout ~ * {
+  /* This won't work, we need to use JS */
 }
 
 .classic-layout main {
   flex: 1;
+  width: 100%;
+  overflow: visible;
 }
 
 /* Container utility class */
+.classic-layout .container-custom,
 .container-custom {
   max-width: 1280px;
   margin: 0 auto;
@@ -24,14 +212,38 @@
 
 /* Responsive container padding */
 @media (min-width: 640px) {
+  .classic-layout .container-custom,
   .container-custom {
     padding: 0 2rem;
   }
 }
 
 @media (min-width: 1024px) {
+  .classic-layout .container-custom,
   .container-custom {
     padding: 0 3rem;
   }
 }
 
+/* Custom scrollbar for classic layout */
+.classic-layout ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.classic-layout ::-webkit-scrollbar-track {
+  background: var(--bg-gray-100);
+}
+
+.classic-layout ::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.classic-layout ::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Ensure smooth scrolling */
+.classic-layout {
+  scroll-behavior: smooth;
+}
