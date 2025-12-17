@@ -143,13 +143,15 @@ body.classic-active {
   overflow-x: hidden !important;
   height: auto !important;
   max-height: none !important;
-  position: relative !important;
+  position: static !important;
 }
 
-#root.classic-active {
+#root.classic-active,
+.App.classic-active {
   height: auto !important;
   overflow: visible !important;
   max-height: none !important;
+  min-height: auto !important;
 }
 
 /* Also target when classic-layout is present (for browsers that support :has) */
@@ -159,12 +161,15 @@ body:has(.classic-layout) {
   overflow-x: hidden !important;
   height: auto !important;
   max-height: none !important;
+  position: static !important;
 }
 
-#root:has(.classic-layout) {
+#root:has(.classic-layout),
+.App:has(.classic-layout) {
   height: auto !important;
   overflow: visible !important;
   max-height: none !important;
+  min-height: auto !important;
 }
 
 /* Classic Layout Container */
@@ -199,6 +204,26 @@ body:has(.classic-layout) {
   flex: 1;
   width: 100%;
   overflow: visible;
+  min-height: auto;
+}
+
+/* Override any min-height constraints that might prevent scrolling */
+.classic-layout .home {
+  min-height: auto !important;
+  height: auto !important;
+}
+
+.classic-layout .projects-section,
+.classic-layout .about-section,
+.classic-layout .languages-section {
+  min-height: auto !important;
+  height: auto !important;
+}
+
+/* Ensure no element is constraining height */
+.classic-layout,
+.classic-layout > * {
+  max-height: none !important;
 }
 
 /* Container utility class */

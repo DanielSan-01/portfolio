@@ -272,6 +272,13 @@ html, body {
   overflow-y: auto;
 }
 
+/* Don't constrain scrolling when classic layout is active */
+html.classic-active,
+body.classic-active {
+  overflow-y: auto !important;
+  height: auto !important;
+}
+
 /* Only apply terminal-specific constraints when terminal is active */
 .App:not(:has(.classic-layout)) {
   /* Terminal mode - can have height constraints */
