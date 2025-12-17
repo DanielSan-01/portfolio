@@ -266,10 +266,11 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: auto;
+  height: auto !important;
   min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  max-height: none !important;
 }
 
 /* Don't constrain scrolling when classic layout is active */
@@ -277,6 +278,7 @@ html.classic-active,
 body.classic-active {
   overflow-y: auto !important;
   height: auto !important;
+  max-height: none !important;
 }
 
 /* Only apply terminal-specific constraints when terminal is active */

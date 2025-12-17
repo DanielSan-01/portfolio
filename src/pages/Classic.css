@@ -136,14 +136,22 @@
 }
 
 /* Force scrolling to work - override any global styles */
-/* Use class-based selectors for better browser support */
+/* CRITICAL: Override the compiled CSS that has height: 100% and overflow: hidden */
 html.classic-active,
-body.classic-active {
+body.classic-active,
+html:has(.classic-layout),
+body:has(.classic-layout) {
   overflow-y: auto !important;
   overflow-x: hidden !important;
   height: auto !important;
   max-height: none !important;
   position: static !important;
+}
+
+/* Override any height: 100% that might be in compiled CSS */
+html.classic-active,
+body.classic-active {
+  height: auto !important;
 }
 
 #root.classic-active,
@@ -193,6 +201,13 @@ body:has(.classic-layout) {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* CRITICAL FIX: Override any height: 100% from compiled CSS that blocks scrolling */
+html.classic-active,
+body.classic-active {
+  height: auto !important;
+  max-height: none !important;
 }
 
 /* Ensure body and html can scroll when classic layout is active */

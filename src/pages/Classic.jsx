@@ -131,6 +131,7 @@ const Classic = () => {
       <main id="main-content">
         <Routes>
           <Route index element={<Home />} />
+          <Route path="" element={<Home />} />
           <Route path="projects" element={<Projects />} />
           <Route path="project/:projectId" element={<ProjectArticle />} />
           <Route path="*" element={<NotFound />} />
