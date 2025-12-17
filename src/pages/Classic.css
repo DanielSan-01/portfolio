@@ -135,41 +135,13 @@
   --gradient-hero-before: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%);
 }
 
-/* Force scrolling to work - override any global styles */
-/* CRITICAL: Override the compiled CSS that has height: 100% and overflow: hidden */
-html.classic-active,
-body.classic-active,
+/* Force scrolling to always work - simple and direct */
 html:has(.classic-layout),
 body:has(.classic-layout) {
   overflow-y: auto !important;
   overflow-x: hidden !important;
   height: auto !important;
   max-height: none !important;
-  position: static !important;
-}
-
-/* Override any height: 100% that might be in compiled CSS */
-html.classic-active,
-body.classic-active {
-  height: auto !important;
-}
-
-#root.classic-active,
-.App.classic-active {
-  height: auto !important;
-  overflow: visible !important;
-  max-height: none !important;
-  min-height: auto !important;
-}
-
-/* Also target when classic-layout is present (for browsers that support :has) */
-html:has(.classic-layout),
-body:has(.classic-layout) {
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  height: auto !important;
-  max-height: none !important;
-  position: static !important;
 }
 
 #root:has(.classic-layout),
@@ -177,7 +149,6 @@ body:has(.classic-layout) {
   height: auto !important;
   overflow: visible !important;
   max-height: none !important;
-  min-height: auto !important;
 }
 
 /* Classic Layout Container */

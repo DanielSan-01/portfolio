@@ -10,6 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Terminal />} />
+          <Route path="/classic" element={<Classic />} />
           <Route path="/classic/*" element={<Classic />} />
         </Routes>
       </div>
