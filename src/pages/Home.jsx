@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { projects } from '../data/projects'
 import ProjectCard from '../components/ProjectCard'
 import { Code, Palette, Zap } from 'lucide-react'
@@ -6,6 +6,13 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { staggerScrollReveal } from '../utils/gsapAnimations'
 import './Home.css'
+
+// Hero slideshow images
+const heroImages = [
+  '/portfolio/images/CleanShot 2025-12-18 at 10.54.55@2x.png',
+  '/portfolio/images/CleanShot 2025-12-18 at 10.55.23@2x.png',
+  '/portfolio/images/CleanShot 2025-12-18 at 10.57.19@2x.png'
+]
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
@@ -19,9 +26,13 @@ const Home = () => {
   const languagesGridRef = useRef(null)
   const aboutSectionRef = useRef(null)
   const featuredProjectRef = useRef(null)
+  const heroSlideshowRef = useRef(null)
   
   // Get CS Inventory Tracker project
   const csTrackerProject = projects.find(p => p.id === 'cs-inventory-tracker')
+  
+  // Slideshow state
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
     // Wait for next tick to ensure DOM is ready
@@ -157,10 +168,43 @@ const Home = () => {
     }
   }, [])
 
+  // Preload images for smooth transitions
+  useEffect(() => {
+    heroImages.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
+  // Slideshow effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length)
+    }, 5000) // Change slide every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className="home">
       {/* Hero Section */}
-      <section className="hero">
+      <section className="hero" ref={heroSlideshowRef}>
+        {/* Slideshow Background */}
+        <div className="hero-slideshow">
+          {heroImages.map((image, index) => (
+            <div
+              key={index}
+              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            />
+          ))}
+        </div>
+        
         <div className="container-custom">
           <div className="hero-content">
             <h1 ref={heroTitleRef} className="hero-title">
@@ -185,6 +229,18 @@ const Home = () => {
               </div>
             </div>
           </div>
+        </div>
+        
+        {/* Slideshow Indicators */}
+        <div className="hero-slideshow-indicators">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              className={`indicator ${index === currentSlide ? 'active' : ''}`}
+              onClick={() => setCurrentSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
