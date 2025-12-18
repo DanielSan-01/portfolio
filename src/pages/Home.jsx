@@ -18,6 +18,10 @@ const Home = () => {
   const projectsGridRef = useRef(null)
   const languagesGridRef = useRef(null)
   const aboutSectionRef = useRef(null)
+  const featuredProjectRef = useRef(null)
+  
+  // Get CS Inventory Tracker project
+  const csTrackerProject = projects.find(p => p.id === 'cs-inventory-tracker')
 
   useEffect(() => {
     // Wait for next tick to ensure DOM is ready
@@ -125,6 +129,21 @@ const Home = () => {
         })
       }
 
+      // Animate featured project section
+      if (featuredProjectRef.current) {
+        gsap.from(featuredProjectRef.current, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: featuredProjectRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        })
+      }
+
       // Refresh ScrollTrigger after a short delay to ensure all elements are registered
       setTimeout(() => {
         ScrollTrigger.refresh()
@@ -169,11 +188,64 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Featured Project - CS Inventory Tracker */}
+      {csTrackerProject && (
+        <section ref={featuredProjectRef} className="featured-project-section">
+          <div className="container-custom">
+            <div className="featured-project-content">
+              <div className="featured-project-image">
+                <img 
+                  src={csTrackerProject.thumbnail} 
+                  alt={csTrackerProject.imageCaption}
+                  className="featured-project-img"
+                />
+              </div>
+              <div className="featured-project-text">
+                <h2 className="featured-project-title">{csTrackerProject.title}</h2>
+                <p className="featured-project-description">
+                  {csTrackerProject.shortDescription}
+                </p>
+                <div className="featured-project-tech">
+                  <h3>Technologies Used:</h3>
+                  <div className="tech-tags">
+                    {csTrackerProject.technologies.map((tech, index) => (
+                      <span key={index} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="featured-project-links">
+                  {csTrackerProject.liveUrl && (
+                    <a 
+                      href={csTrackerProject.liveUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="btn-primary"
+                    >
+                      View Live Site
+                    </a>
+                  )}
+                  {csTrackerProject.githubUrl && (
+                    <a 
+                      href={csTrackerProject.githubUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="btn-secondary"
+                    >
+                      View on GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Projects Section */}
       <section className="projects-section">
         <div className="container-custom">
           <div className="section-header">
-            <h2 className="section-title">Featured Projects</h2>
+            <h2 className="section-title">My School Work</h2>
             <p className="section-description">
               A showcase of my projects from Noroff Fagskole demonstrating skills in React development, 
               modern web technologies, and responsive design principles.
@@ -181,7 +253,7 @@ const Home = () => {
           </div>
           
           <div ref={projectsGridRef} className="projects-grid">
-            {projects.slice(0, 3).map((project) => (
+            {projects.filter(p => p.id !== 'cs-inventory-tracker').slice(0, 3).map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
