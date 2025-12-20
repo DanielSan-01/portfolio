@@ -36,6 +36,15 @@ jobs:
         run: |
           rm -rf docs/*
           cp -r dist/* docs/
+          # Ensure images directory exists and is copied (Vite copies public/ to dist/, but ensure it's in docs/)
+          if [ -d "dist/images" ]; then
+            mkdir -p docs/images
+            cp -r dist/images/* docs/images/ 2>/dev/null || true
+          fi
+          if [ -d "public/images" ]; then
+            mkdir -p docs/images
+            cp -r public/images/* docs/images/ 2>/dev/null || true
+          fi
           
       - name: Commit and push changes
         run: |

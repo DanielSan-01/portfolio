@@ -31,6 +31,10 @@
   height: 100%;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
+  /* Fallback background in case images don't load */
+  background: 
+    var(--gradient-hero-overlay),
+    url('../assets/norway-banner.webp') center/cover no-repeat;
 }
 
 .hero-slide.active {

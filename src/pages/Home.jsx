@@ -8,10 +8,15 @@ import { staggerScrollReveal } from '../utils/gsapAnimations'
 import './Home.css'
 
 // Hero slideshow images
+// Using encodeURI to handle spaces in filenames properly
+const getImagePath = (filename) => {
+  return `/portfolio/images/${encodeURIComponent(filename)}`
+}
+
 const heroImages = [
-  '/portfolio/images/CleanShot 2025-12-18 at 10.54.55@2x.png',
-  '/portfolio/images/CleanShot 2025-12-18 at 10.55.23@2x.png',
-  '/portfolio/images/CleanShot 2025-12-18 at 10.57.19@2x.png'
+  getImagePath('CleanShot 2025-12-18 at 10.54.55@2x.png'),
+  getImagePath('CleanShot 2025-12-18 at 10.55.23@2x.png'),
+  getImagePath('CleanShot 2025-12-18 at 10.57.19@2x.png')
 ]
 
 // Register ScrollTrigger plugin
@@ -33,6 +38,7 @@ const Home = () => {
   
   // Slideshow state
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
 
   useEffect(() => {
     // Wait for next tick to ensure DOM is ready
@@ -168,12 +174,48 @@ const Home = () => {
     }
   }, [])
 
-  // Preload images for smooth transitions
+  // Preload images for smooth transitions with error handling
   useEffect(() => {
+    let loadedCount = 0
+    const totalImages = heroImages.length
+    let timeoutId
+    
+    if (totalImages === 0) {
+      setImagesLoaded(true)
+      return
+    }
+    
+    // Set a timeout to ensure page doesn't hang forever
+    timeoutId = setTimeout(() => {
+      console.warn('Hero images taking too long to load, continuing anyway')
+      setImagesLoaded(true)
+    }, 10000) // 10 second timeout
+    
     heroImages.forEach((src) => {
       const img = new Image()
+      img.onload = () => {
+        loadedCount++
+        if (loadedCount === totalImages) {
+          clearTimeout(timeoutId)
+          setImagesLoaded(true)
+          console.log('All hero images loaded successfully')
+        }
+      }
+      img.onerror = () => {
+        console.error('Failed to load hero image:', src)
+        loadedCount++
+        // If all images failed or we've tried all, mark as loaded anyway
+        if (loadedCount === totalImages) {
+          clearTimeout(timeoutId)
+          setImagesLoaded(true)
+        }
+      }
       img.src = src
     })
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+    }
   }, [])
 
   // Slideshow effect
@@ -196,7 +238,7 @@ const Home = () => {
               key={index}
               className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
               style={{
-                backgroundImage: `url(${image})`,
+                backgroundImage: `url("${image}")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
