@@ -36,7 +36,7 @@ const Home = () => {
   // Get CS Inventory Tracker project
   const csTrackerProject = projects.find(p => p.id === 'cs-inventory-tracker')
   
-  // Slideshow state
+  // Slideshow state for featured project
   const [currentSlide, setCurrentSlide] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(false)
 
@@ -231,22 +231,6 @@ const Home = () => {
     <div className="home">
       {/* Hero Section */}
       <section className="hero" ref={heroSlideshowRef}>
-        {/* Slideshow Background */}
-        <div className="hero-slideshow">
-          {heroImages.map((image, index) => (
-            <div
-              key={index}
-              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-              style={{
-                backgroundImage: `url("${image}")`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
-            />
-          ))}
-        </div>
-        
         <div className="container-custom">
           <div className="hero-content">
             <h1 ref={heroTitleRef} className="hero-title">
@@ -272,18 +256,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
-        {/* Slideshow Indicators */}
-        <div className="hero-slideshow-indicators">
-          {heroImages.map((_, index) => (
-            <button
-              key={index}
-              className={`indicator ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </section>
 
       {/* Featured Project - CS Inventory Tracker */}
@@ -292,11 +264,32 @@ const Home = () => {
           <div className="container-custom">
             <div className="featured-project-content">
               <div className="featured-project-image">
-                <img 
-                  src={csTrackerProject.thumbnail} 
-                  alt={csTrackerProject.imageCaption}
-                  className="featured-project-img"
-                />
+                {/* Slideshow */}
+                <div className="featured-project-slideshow">
+                  {heroImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`featured-project-slide ${index === currentSlide ? 'active' : ''}`}
+                      style={{
+                        backgroundImage: `url("${image}")`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                      }}
+                    />
+                  ))}
+                </div>
+                {/* Slideshow Indicators */}
+                <div className="featured-project-slideshow-indicators">
+                  {heroImages.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`featured-indicator ${index === currentSlide ? 'active' : ''}`}
+                      onClick={() => setCurrentSlide(index)}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
               <div className="featured-project-text">
                 <h2 className="featured-project-title">{csTrackerProject.title}</h2>
