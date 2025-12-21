@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { projects } from '../data/projects'
 import ProjectCard from '../components/ProjectCard'
-import { Code, Palette, Zap } from 'lucide-react'
+import { Code, Palette, Zap, Users, Network, Smartphone } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { staggerScrollReveal } from '../utils/gsapAnimations'
@@ -237,21 +237,20 @@ const Home = () => {
               DanielSan
             </h1>
             <p ref={heroDescriptionRef} className="hero-description">
-              Frontend Developer student at Noroff Fagskole, passionate about creating beautiful, 
-              functional, and user-friendly web applications using modern technologies and best practices.
+              Frontend Developer who creates functional, polished web applications. I work with modern JavaScript frameworks and have expanded into full-stack development, recently building a CS2 inventory tracker with Steam integration, analytics, and PostgreSQL backend.
             </p>
             <div ref={heroFeaturesRef} className="hero-features">
               <div className="feature">
-                <Code size={24} />
-                <span>Clean Code</span>
+                <Users size={24} />
+                <span>User-Focused Design</span>
               </div>
               <div className="feature">
-                <Palette size={24} />
-                <span>Modern Design</span>
+                <Network size={24} />
+                <span>API Integration</span>
               </div>
               <div className="feature">
-                <Zap size={24} />
-                <span>Performance</span>
+                <Smartphone size={24} />
+                <span>Responsive Design</span>
               </div>
             </div>
           </div>

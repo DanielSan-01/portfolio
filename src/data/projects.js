@@ -8,13 +8,13 @@ export const projects = [
   {
     id: 'cs-inventory-tracker',
     title: 'CS Inventory Tracker',
-    shortDescription: 'My first fullstack application, for CS2 players where they can track and analyse their ingame inventory. The solution also includes item purchase planner and loadout cooker. Using steam API, user can log in and import their inventory. Site is not affiliated with Valve.',
+    shortDescription: 'My first fullstack application, for CS2 players where they can track and analyse their ingame inventory. The solution also includes item purchase planner and loadout cooker. Using steam API, user can log in and import their inventory. Site is not affiliated with Valve. Taken from Figma designs through deployment with custom domain and Railway hosting.',
     thumbnail: holidazeImg, // Placeholder
     image: holidazeImg,
     imageCaption: 'CS Inventory Tracker - Fullstack application for CS2 inventory management',
     liveUrl: 'https://www.csinvtracker.com',
     githubUrl: 'https://github.com/DanielSan-01/csInvTracker',
-    description: `My first fullstack application, for CS2 players where they can track and analyse their ingame inventory. The solution also includes item purchase planner and loadout cooker. Using steam API, user can log in and import their inventory. Site is not affiliated with Valve.`,
+    description: `My first fullstack application, for CS2 players where they can track and analyse their ingame inventory. The solution also includes item purchase planner and loadout cooker. Using steam API, user can log in and import their inventory. Site is not affiliated with Valve. Taken from Figma designs through deployment with custom domain and Railway hosting.`,
     reflections: `
       <h3>Core Features</h3>
       <ul>
