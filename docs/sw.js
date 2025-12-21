@@ -19,18 +19,12 @@ self.addEventListener('install', (event) => {
   )
 })
 
-// Fetch event - Pass through all requests without caching
-// This prevents the service worker from blocking requests
+// Fetch event - Don't intercept any requests
+// This prevents the service worker from blocking any requests including images
 self.addEventListener('fetch', (event) => {
-  // Always fetch from network, don't use cache
-  // This ensures the service worker doesn't block requests
-  event.respondWith(
-    fetch(event.request).catch((error) => {
-      console.error('Fetch failed:', error)
-      // If fetch fails, don't try cache - just let it fail naturally
-      throw error
-    })
-  )
+  // Don't intercept - let browser handle all requests normally
+  // This ensures images and all assets load without interference
+  return
 })
 
 // Activate event - clean up old caches
