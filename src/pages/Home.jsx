@@ -266,14 +266,18 @@ const Home = () => {
                 {/* Slideshow */}
                 <div className="featured-project-slideshow">
                   {heroImages.map((image, index) => (
-                    <div
+                    <img
                       key={index}
+                      src={image}
+                      alt={`CS Inventory Tracker screenshot ${index + 1}`}
                       className={`featured-project-slide ${index === currentSlide ? 'active' : ''}`}
-                      style={{
-                        backgroundImage: `url("${image}")`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat'
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      onError={(e) => {
+                        console.error('Failed to load slideshow image:', image)
+                        e.target.style.display = 'none'
+                      }}
+                      onLoad={() => {
+                        console.log('Slideshow image loaded:', image)
                       }}
                     />
                   ))}
