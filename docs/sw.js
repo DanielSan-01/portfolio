@@ -1,4 +1,4 @@
-const CACHE_NAME = 'danielsan-portfolio-v2' // Updated to force cache refresh
+const CACHE_NAME = 'danielsan-portfolio-v3' // Updated to force cache refresh
 const urlsToCache = [
   '/portfolio/',
   '/portfolio/index.html'
@@ -19,42 +19,18 @@ self.addEventListener('install', (event) => {
   )
 })
 
-// Fetch event - network first for CSS/JS, cache for HTML
+// Fetch event - Pass through all requests without caching
+// This prevents the service worker from blocking requests
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url)
-  const isAsset = url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|svg|webp|woff|woff2)$/i)
-  
-  // For CSS/JS/assets: Network first, then cache (ensures fresh CSS)
-  if (isAsset) {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Cache the fresh response
-          const responseToCache = response.clone()
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache)
-          })
-          return response
-        })
-        .catch(() => {
-          // Fallback to cache if network fails
-          return caches.match(event.request)
-        })
-    )
-  } else {
-    // For HTML: Cache first, then network
-    event.respondWith(
-      caches.match(event.request)
-        .then((response) => {
-          return response || fetch(event.request)
-        })
-        .catch(() => {
-          if (event.request.mode === 'navigate') {
-            return caches.match('/portfolio/')
-          }
-        })
-    )
-  }
+  // Always fetch from network, don't use cache
+  // This ensures the service worker doesn't block requests
+  event.respondWith(
+    fetch(event.request).catch((error) => {
+      console.error('Fetch failed:', error)
+      // If fetch fails, don't try cache - just let it fail naturally
+      throw error
+    })
+  )
 })
 
 // Activate event - clean up old caches
@@ -72,6 +48,8 @@ self.addEventListener('activate', (event) => {
     }).then(() => {
       // Take control of all clients immediately
       return self.clients.claim()
+    }).catch((error) => {
+      console.error('Service worker activation error:', error)
     })
   )
 }) 
