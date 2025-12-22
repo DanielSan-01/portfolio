@@ -10,6 +10,8 @@ import './Home.css'
 // Hero slideshow images
 // Using encodeURI to handle spaces in filenames properly
 const getImagePath = (filename) => {
+  // Vite serves public folder files from the base path in both dev and prod
+  // With base: '/portfolio/', files in public/images/ are at /portfolio/images/
   return `/portfolio/images/${encodeURIComponent(filename)}`
 }
 
@@ -39,6 +41,7 @@ const Home = () => {
   // Slideshow state for featured project
   const [currentSlide, setCurrentSlide] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   useEffect(() => {
     // Wait for next tick to ensure DOM is ready
@@ -227,6 +230,24 @@ const Home = () => {
     return () => clearInterval(interval)
   }, [])
 
+  // Keyboard navigation for fullscreen modal
+  useEffect(() => {
+    if (!isFullscreen) return
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsFullscreen(false)
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)
+      } else if (e.key === 'ArrowRight') {
+        setCurrentSlide((prev) => (prev + 1) % heroImages.length)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isFullscreen])
+
   return (
     <div className="home">
       {/* Hero Section */}
@@ -262,22 +283,34 @@ const Home = () => {
         <section ref={featuredProjectRef} className="featured-project-section">
           <div className="container-custom">
             <div className="featured-project-content">
-              <div className="featured-project-image">
+              <div className="featured-project-image" onClick={() => setIsFullscreen(true)} style={{ cursor: 'pointer' }}>
                 {/* Slideshow */}
                 <div className="featured-project-slideshow">
                   {heroImages.map((image, index) => (
                     <img
-                      key={index}
+                      key={`slide-${index}-${image}`}
                       src={image}
                       alt={`CS Inventory Tracker screenshot ${index + 1}`}
                       className={`featured-project-slide ${index === currentSlide ? 'active' : ''}`}
                       loading={index === 0 ? 'eager' : 'lazy'}
                       onError={(e) => {
+                        const img = e.target
+                        // Only handle error once to prevent infinite loop
+                        if (img.dataset.errorHandled === 'true') {
+                          return
+                        }
+                        img.dataset.errorHandled = 'true'
                         console.error('Failed to load slideshow image:', image)
-                        e.target.style.display = 'none'
+                        // Hide the image if it fails to load
+                        img.style.display = 'none'
+                        img.style.opacity = '0'
                       }}
-                      onLoad={() => {
-                        console.log('Slideshow image loaded:', image)
+                      onLoad={(e) => {
+                        // Clear error flag on successful load
+                        const img = e.target
+                        if (img.dataset.errorHandled) {
+                          delete img.dataset.errorHandled
+                        }
                       }}
                     />
                   ))}
@@ -288,12 +321,65 @@ const Home = () => {
                     <button
                       key={index}
                       className={`featured-indicator ${index === currentSlide ? 'active' : ''}`}
-                      onClick={() => setCurrentSlide(index)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setCurrentSlide(index)
+                      }}
                       aria-label={`Go to slide ${index + 1}`}
                     />
                   ))}
                 </div>
               </div>
+              
+              {/* Fullscreen Modal */}
+              {isFullscreen && (
+                <div className="fullscreen-modal" onClick={() => setIsFullscreen(false)}>
+                  <button 
+                    className="fullscreen-close"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setIsFullscreen(false)
+                    }}
+                    aria-label="Close fullscreen"
+                  >
+                    ×
+                  </button>
+                  <div className="fullscreen-content" onClick={(e) => e.stopPropagation()}>
+                    <img
+                      src={heroImages[currentSlide]}
+                      alt={`CS Inventory Tracker screenshot ${currentSlide + 1}`}
+                      className="fullscreen-image"
+                    />
+                    <div className="fullscreen-controls">
+                      <button
+                        className="fullscreen-nav prev"
+                        onClick={() => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)}
+                        aria-label="Previous image"
+                      >
+                        ‹
+                      </button>
+                      <span className="fullscreen-counter">{currentSlide + 1} / {heroImages.length}</span>
+                      <button
+                        className="fullscreen-nav next"
+                        onClick={() => setCurrentSlide((prev) => (prev + 1) % heroImages.length)}
+                        aria-label="Next image"
+                      >
+                        ›
+                      </button>
+                    </div>
+                    <div className="fullscreen-indicators">
+                      {heroImages.map((_, index) => (
+                        <button
+                          key={index}
+                          className={`fullscreen-indicator ${index === currentSlide ? 'active' : ''}`}
+                          onClick={() => setCurrentSlide(index)}
+                          aria-label={`Go to slide ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="featured-project-text">
                 <h2 className="featured-project-title">{csTrackerProject.title}</h2>
                 <p className="featured-project-description">
@@ -451,6 +537,41 @@ const Home = () => {
                 <span>Ps</span>
               </div>
               <span className="language-name">Photoshop</span>
+            </div>
+            
+            <div className="language-item">
+              <div className="language-icon typescript">
+                <span>TS</span>
+              </div>
+              <span className="language-name">TypeScript</span>
+            </div>
+            
+            <div className="language-item">
+              <div className="language-icon nextjs">
+                <span>N</span>
+              </div>
+              <span className="language-name">Next.js</span>
+            </div>
+            
+            <div className="language-item">
+              <div className="language-icon dotnet">
+                <span>.NET</span>
+              </div>
+              <span className="language-name">.NET</span>
+            </div>
+            
+            <div className="language-item">
+              <div className="language-icon postgresql">
+                <span>SQL</span>
+              </div>
+              <span className="language-name">PostgreSQL</span>
+            </div>
+            
+            <div className="language-item">
+              <div className="language-icon docker">
+                <span>D</span>
+              </div>
+              <span className="language-name">Docker</span>
             </div>
           </div>
         </div>
