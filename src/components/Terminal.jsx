@@ -332,8 +332,28 @@ const Terminal = () => {
     inputRef.current?.focus()
   }
 
+  const handleSwitchToClassic = () => {
+    navigate('/classic')
+  }
+
   return (
     <div className="terminal-container" ref={terminalRef} onClick={handleTerminalClick}>
+      {isMobile && (
+        <div className="mobile-classic-banner">
+          <div className="mobile-classic-banner-content">
+            <span className="mobile-classic-banner-text">Better experience on mobile?</span>
+            <button 
+              className="mobile-classic-banner-button"
+              onClick={(e) => {
+                e.stopPropagation()
+                handleSwitchToClassic()
+              }}
+            >
+              Switch to Classic Layout
+            </button>
+          </div>
+        </div>
+      )}
       {isMobile ? (
         <div className="mobile-banner">
           <div className="mobile-banner-line">Danielsan's</div>
